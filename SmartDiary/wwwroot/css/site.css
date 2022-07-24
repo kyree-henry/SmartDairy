@@ -1,0 +1,7 @@
+.row .input-field textarea:focus {
+    border-bottom: 1px solid #9c27b0 !important;
+    box-shadow: 0 1px 0 0 #9c27b0 !important
+}
+textarea.materialize-textarea:focus:not([readonly]) + label {
+    color: #9c27b0;
+}

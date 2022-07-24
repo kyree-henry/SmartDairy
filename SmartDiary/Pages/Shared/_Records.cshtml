@@ -1,0 +1,60 @@
+﻿@inject SmartDiary.Data.AppDBContext _context;
+
+@{
+    var data = await _context.Diaries.OrderByDescending(a => a.CreatedOn).ToListAsync();
+    if (data?.Count > 0)
+    {
+        foreach (var item in data)
+        {
+            <div class="card horizontal">
+                <div class="card-image">
+                    <img src="img/@(item.Sentiment > 0.6 ? "happy_emoji.png" : item.Sentiment > 0.4 && item.Sentiment <= 0.6 ? "neutral_emoji.png" : "angry_emoji.png")" width="60" height="60">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>
+                            @item.Note
+                            <br>
+                            <b class="purple-text darken-5">@item.CreatedOn.ToString("dd MMM, yyyy")</b>
+                        </p>
+                        <form asp-page-handler="Delete" asp-route-Id="@item.Id" method="post">
+                            <button type="submit" class="btn-floating right waves-effect waves-light red" ><i class="material-icons">delete</i></button>
+                        </form>
+                        <a asp-page="edit" asp-route-id="@item.Id" class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">edit</i></a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="center">
+            <img src="~/img/empty.svg" height="250" width="250" />
+        </div>
+    }
+}
+
+<!--<div class="card horizontal">
+    <div class="card-panel grey lighten-5 z-depth-1" style="margin:0">
+        <div class="row valign-wrapper">
+            <div class="col s2 card-image" style="display: flex; align-items: center; justify-content: center;">
+                <div class="card-image">
+                    <img src="img/happy_emoji.png" alt="" width="60" height="60" class="circle responsive-img">-->
+<!-- notice the "circle" class -->
+<!--</div>
+            </div>
+            <div class="col s10 ">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>
+                            I am a very simple card. I am good at containing small bits of information.
+                            <br><b class="purple-text darken-5">26 July,2021</b>
+                        </p>
+                        <a class="btn-floating right waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                        <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">edit</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

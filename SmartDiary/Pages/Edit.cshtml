@@ -1,0 +1,32 @@
+﻿@page
+@model SmartDiary.Pages.EditModel
+@{
+
+}
+
+<section class="section">
+    <div class="row">
+        <form class="col s12" method="post">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="hidden" asp-for="Entry.Id" />
+                    <i class="material-icons prefix purple-text">import_contacts</i>
+                    <textarea asp-for="Entry.Note" class="materialize-textarea"></textarea>
+                    <label asp-for="Entry.Note"></label>
+                    <span asp-validation-for="Entry.Note" class="red-text"></span>
+                </div>
+                <div class="col s12">
+                    <button class="btn purple right" type="submit"><i class="material-icons left">update</i>Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+<div class="center">
+    <img src="~/img/update.svg" style="height:250px; width:250px" />
+</div>
+
+@section Scripts{ 
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

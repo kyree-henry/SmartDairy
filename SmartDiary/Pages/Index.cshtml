@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<section class="section">
+    <div class="row">
+        <form method="post" class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix purple-text">import_contacts</i>
+                    <textarea asp-for="Entry.Note" class="materialize-textarea"></textarea>
+                    <label asp-for="Entry.Note"></label>
+                    <span asp-validation-for="Entry.Note" class="red-text"></span>
+                </div>
+                <div class="col s12">
+                    <button class="btn purple right" type="submit"><i class="material-icons left">save</i>Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+
+
+<!--Cards to display diary entries-->
+<section>
+    <div class="col s12">
+        <h2 class="flow-text purple-text">Days of my life</h2>
+        @await Html.PartialAsync("_Records")
+    </div>
+</section>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
